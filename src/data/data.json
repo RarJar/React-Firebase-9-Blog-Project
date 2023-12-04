@@ -1,0 +1,20 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "fsadfsadf",
+      "category": [
+        "Paid","Free"
+      ],
+      "description": "fsad fsadf fsadf fsadf fsadf fsadf fsadf fsadffs  adffsad ffsadffsadffsa dffsadff sadffsadffsadf"
+    },
+    {
+      "id": 2,
+      "title": "fsadfsadf",
+      "category": [
+        "Paid","Premium"
+      ],
+      "description": "Adffsad ffsadffsadffsa dffsadff sadffsadffsadf"
+    }
+  ]
+}

@@ -1,6 +1,9 @@
-export default function BlogCard() {
+export default function BlogCard({ blog }) {
   return (
-    <div className="border-r border-b border-l border-gray-400 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
+    <div
+      key={blog.id}
+      className="border-r border-b border-l border-gray-400 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal"
+    >
       <img
         src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500"
         className="w-full mb-3"
@@ -18,7 +21,7 @@ export default function BlogCard() {
             Members only
           </p>
           <div className="py-1 flex-wrap space-x-2">
-            {["Website", "Android", "IOS"].map((category) => (
+            {blog.category.map((category) => (
               <a
                 key={category}
                 href="#"
@@ -32,7 +35,7 @@ export default function BlogCard() {
             href="#"
             className="text-gray-900 font-bold text-lg mb-2 hover:text-indigo-600 inline-block"
           >
-            Can coffee make you a better developer?
+            {blog.title}
           </a>
           <p className="text-gray-700 text-sm">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
