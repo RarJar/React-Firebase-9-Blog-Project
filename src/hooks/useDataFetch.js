@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
-function useDataFetch(url) {
+function useDataFetch(url, method = "GET") {
   let [data, setData] = useState(null);
+  let [newData, createData] = useState(null);
   let [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -10,20 +11,38 @@ function useDataFetch(url) {
     let abortController = new AbortController();
     let signal = abortController.signal;
 
-    fetch(url, { signal })
-      .then((res) => res.json())
-      .then((json) => {
-        setData(json);
-        setLoading(false);
+    let fetchData = () => {
+      fetch(url, { signal })
+        .then((res) => res.json())
+        .then((json) => {
+          setData(json);
+          setLoading(false);
+        });
+    };
+
+    if (method === "GET") {
+      fetchData();
+    }
+
+    if (method === "POST" && newData) {
+      fetch("http://localhost:3001/blogs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newData),
       });
+
+      fetchData();
+    }
 
     // Cleanup Function
     return () => {
       abortController.abort();
     };
-  }, [url]);
+  }, [url, newData, method]);
 
-  return { data, loading };
+  return { createData, data, loading };
 }
 
 export default useDataFetch;

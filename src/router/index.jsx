@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import Layout from "../pages/Layouts/Layout";
 import FileNotFound from "../pages/errors/404";
 import View from "../pages/View";
-import Form from "../components/Form";
+import BlogForm from "../components/BlogForm";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/form",
-        element: <Form />,
+        element: <BlogForm />,
       },
       {
         path: "*",

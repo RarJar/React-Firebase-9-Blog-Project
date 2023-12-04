@@ -23,7 +23,7 @@ export default function BlogCard({ blog }) {
             Members only
           </p>
           <div className="py-1 flex-wrap space-x-2">
-            {blog.category.map((category) => (
+            {blog.categories.map((category) => (
               <a
                 key={category}
                 href="#"
