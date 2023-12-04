@@ -1,10 +1,9 @@
-import { useState } from "react";
 import useDataFetch from "../hooks/useDataFetch";
 import BlogCard from "./BlogCard";
 import Loading from "./Loading";
 
 export default function BlogList() {
-  let [url, setUrl] = useState("http://localhost:3001/blogs");
+  let url = "http://localhost:3001/blogs";
   let { data: blogs, loading } = useDataFetch(url);
 
   return (

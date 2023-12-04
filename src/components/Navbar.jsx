@@ -1,13 +1,15 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
   return (
     <div>
       <nav className="relative p-4 flex justify-between items-center bg-white dark:bg-gray-800 border-b-2 dark:border-gray-600">
-        <a
+        <Link
           className="text-2xl font-bold text-violet-600 dark:text-white"
-          href="#"
+          to="/"
         >
           TailwindFlex
-        </a>
+        </Link>
 
         <div className="lg:hidden">
           <button
@@ -65,11 +67,11 @@ export default function Navbar() {
                 </svg>
         </button> */}
 
-          <a href="/create">
+          <Link to="/form">
             <button className=" py-1.5 px-3 m-1 text-center bg-violet-700 border rounded-md text-white  hover:bg-violet-500 hover:text-gray-100 dark:text-gray-200 dark:bg-violet-700 hidden lg:block">
               Create Blog
             </button>
-          </a>
+          </Link>
 
           <div>
             <span

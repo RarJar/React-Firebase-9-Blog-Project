@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function BlogCard({ blog }) {
   return (
     <div
@@ -31,12 +33,12 @@ export default function BlogCard({ blog }) {
               </a>
             ))}
           </div>
-          <a
-            href="#"
-            className="text-gray-900 font-bold text-lg mb-2 hover:text-indigo-600 inline-block"
+          <Link
+            to={`/blog/${blog.id}`}
+            className="text-gray-900 font-medium text-xl tracking-widest mb-2 hover:text-indigo-600 inline-block"
           >
             {blog.title}
-          </a>
+          </Link>
           <p className="text-gray-700 text-sm">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Voluptatibus quia, nulla! Maiores et perferendis eaque,
