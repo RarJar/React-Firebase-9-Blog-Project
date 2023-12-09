@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className=" my-[200px]">
+    <div className="my-[200px]">
       <svg
         className="h-14 w-14 animate-spin stroke-gray-500 mx-auto"
         viewBox="0 0 256 256"

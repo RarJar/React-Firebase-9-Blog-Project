@@ -1,13 +1,20 @@
+import { useLocation } from "react-router-dom";
 import useDataFetch from "../hooks/useDataFetch";
 import BlogCard from "./BlogCard";
 import Loading from "./Loading";
+import Search from "./Search";
 
 export default function BlogList() {
-  let url = "http://localhost:3001/blogs";
-  let { data: blogs, loading } = useDataFetch(url);
+  let location = useLocation();
+  let params = new URLSearchParams(location.search);
+  let search = params.get("search");
+  let { data: blogs, loading } = useDataFetch(
+    `http://localhost:3001/blogs?q=${search}`
+  );
 
   return (
-    <div className="max-w-screen-xl mx-auto text-center p-5 sm:p-10 md:p-16">
+    <div className="max-w-screen-xl mx-auto text-center p-5 md:p-10">
+      <Search />
       {!!blogs && (
         <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-7">
           {blogs.map((blog) => (
@@ -15,6 +22,12 @@ export default function BlogList() {
               <BlogCard blog={blog} />
             </div>
           ))}
+        </div>
+      )}
+
+      {blogs && !blogs.length && (
+        <div className="text-red-500 text-center text-lg py-[200px]">
+          No Result Found !
         </div>
       )}
 

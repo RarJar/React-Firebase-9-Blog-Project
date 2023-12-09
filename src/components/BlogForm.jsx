@@ -14,6 +14,9 @@ export default function Form() {
   );
 
   let addCategory = () => {
+    if (category && categories.includes(category)) {
+      return;
+    }
     setCategories((prev) => [category, ...prev]);
     setCategory("");
   };

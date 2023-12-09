@@ -8,7 +8,7 @@ export default function Navbar() {
           className="text-2xl font-bold text-violet-600 dark:text-white"
           to="/"
         >
-          TailwindFlex
+          Library Store
         </Link>
 
         <div className="lg:hidden">
@@ -26,33 +26,6 @@ export default function Navbar() {
             </svg>
           </button>
         </div>
-
-        <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-          <li>
-            <div className=" relative mx-auto text-gray-600">
-              <input
-                className="border border-gray-300 placeholder-current h-10 px-5 pr-16  rounded-lg text-sm focus:outline-none dark:bg-gray-500 dark:border-gray-50 dark:text-gray-200 "
-                type="search"
-                name="search"
-                placeholder="Search"
-              />
-
-              <button
-                type="submit"
-                className="absolute right-0 top-0 mt-3 mr-4"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="text-gray-500 fill-current w-[16px]"
-                  viewBox="0 0 512 512"
-                >
-                  <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                </svg>
-              </button>
-            </div>
-          </li>
-        </ul>
-
         <div className="hidden lg:flex">
           {/* <button id="theme-toggle" type="button" className="hidden lg:inline-block lg:ml-auto py-1.5 px-3 m-1 text-center bg-gray-100 border border-gray-300 rounded-md text-black  hover:bg-gray-100 dark:text-gray-300 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <svg id="theme-toggle-dark-icon" className="w-5 h-6 hidden" fill="currentColor" viewBox="0 0 20 20"
