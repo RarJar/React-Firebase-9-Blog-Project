@@ -8,9 +8,10 @@ export default function BlogList() {
   let location = useLocation();
   let params = new URLSearchParams(location.search);
   let search = params.get("search");
-  let { data: blogs, loading } = useDataFetch(
-    `http://localhost:3001/blogs?q=${search}`
-  );
+  let url = search
+    ? `http://localhost:3001/blogs?q=${search}`
+    : "http://localhost:3001/blogs";
+  let { data: blogs, loading } = useDataFetch(url);
 
   return (
     <div className="max-w-screen-xl mx-auto text-center p-5 md:p-10">

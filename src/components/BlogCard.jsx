@@ -12,16 +12,12 @@ export default function BlogCard({ blog }) {
       />
       <div className="p-4 pt-2">
         <div className="mb-8">
-          <p className="text-sm text-gray-600 flex items-center">
-            <svg
-              className="fill-current text-gray-500 w-3 h-3 mr-2"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z"></path>
-            </svg>
-            Members only
-          </p>
+          <Link
+            to={`/blog/${blog.id}`}
+            className="text-gray-900 font-medium text-xl tracking-widest mb-2 hover:text-indigo-600 inline-block"
+          >
+            {blog.title}
+          </Link>
           <div className="py-1 flex-wrap space-x-2">
             {blog.categories.map((category) => (
               <a
@@ -33,12 +29,6 @@ export default function BlogCard({ blog }) {
               </a>
             ))}
           </div>
-          <Link
-            to={`/blog/${blog.id}`}
-            className="text-gray-900 font-medium text-xl tracking-widest mb-2 hover:text-indigo-600 inline-block"
-          >
-            {blog.title}
-          </Link>
           <p className="text-gray-700 text-sm">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Voluptatibus quia, nulla! Maiores et perferendis eaque,
