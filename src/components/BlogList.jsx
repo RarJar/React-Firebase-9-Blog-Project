@@ -27,7 +27,7 @@ export default function BlogList() {
       )}
 
       {blogs && !blogs.length && (
-        <div className="text-red-500 text-center text-lg py-[200px]">
+        <div className="text-red-500 text-center text-xl py-[200px]">
           No Result Found !
         </div>
       )}

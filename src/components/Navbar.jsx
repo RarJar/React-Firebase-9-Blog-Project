@@ -1,10 +1,24 @@
 import { Link } from "react-router-dom";
 import "../assets/css/index.css";
+import useTheme from "../hooks/useTheme";
+import { useEffect } from "react";
 
 export default function Navbar() {
+  let { theme } = useTheme();
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.removeItem("theme", "dark");
+    }
+  }, [theme]);
+
   return (
     <div>
-      <nav className="relative p-4 flex justify-between items-center bg-white dark:bg-gray-800 border-b-2 dark:border-gray-600">
+      <nav className="relative p-4 flex justify-between items-center bg-white dark:bg-darkPrimary border-b-2">
         <Link
           className="text-2xl font-bold text-primary dark:text-white"
           to="/"
@@ -57,7 +71,7 @@ export default function Navbar() {
               data="{{ json_encode($util_data) }}"
             ></span>
             <a
-              className=" py-1.5 px-3 m-1 text-center bg-gray-100 border border-gray-300 rounded-md text-black  hover:bg-gray-100 dark:text-gray-300 dark:bg-gray-700 hidden lg:inline-block "
+              className=" py-1.5 px-3 m-1 text-center bg-gray-100 border border-gray-300 rounded-md text-black  hover:bg-gray-100 dark:text-gray-300 dark:bg-gray-600 hidden lg:inline-block "
               href="https://tailwindflex.com/login"
             >
               Sign In

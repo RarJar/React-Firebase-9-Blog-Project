@@ -4,17 +4,17 @@ export default function BlogCard({ blog }) {
   return (
     <div
       key={blog.id}
-      className="border-r !text-start border-b border-l border-gray-400 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal"
+      className="!text-start h-[485px] shadow-md bg-white dark:bg-darkCard rounded-md flex flex-col justify-between leading-normal"
     >
       <img
         src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500"
-        className="w-full mb-3"
+        className="w-full mb-3 rounded-t-md"
       />
       <div className="p-4 pt-2">
-        <div className="mb-8">
+        <div className="mb-6">
           <Link
             to={`/blog/${blog.id}`}
-            className="text-gray-900 font-medium text-xl tracking-widest mb-2 hover:text-indigo-600 inline-block"
+            className="text-gray-900 dark:text-white font-medium text-xl tracking-widest mb-2 hover:text-indigo-600 dark:hover:text-indigo-600 inline-block"
           >
             {blog.title}
           </Link>
@@ -29,10 +29,8 @@ export default function BlogCard({ blog }) {
               </a>
             ))}
           </div>
-          <p className="text-gray-700 text-sm">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptatibus quia, nulla! Maiores et perferendis eaque,
-            exercitationem praesentium nihil.
+          <p className="text-gray-700 dark:text-white text-md line-clamp-3 leading-6">
+            {blog.description}
           </p>
         </div>
         <div className="flex items-center">
@@ -46,11 +44,11 @@ export default function BlogCard({ blog }) {
           <div className="text-sm">
             <a
               href="#"
-              className="text-gray-900 font-semibold leading-none hover:text-indigo-600"
+              className="text-gray-900 dark:text-white font-semibold leading-none"
             >
               Jonathan Reinink
             </a>
-            <p className="text-gray-600">Aug 18</p>
+            <p className="text-gray-600 dark:text-white">Aug 18</p>
           </div>
         </div>
       </div>

@@ -6,11 +6,11 @@ export default function HeroSection() {
       data-aos-duration="800"
     >
       <div className="pr-2 md:mb-14 py-14 md:py-0">
-        <h1 className="text-3xl font-semibold text-blue-900 xl:text-5xl lg:text-3xl">
+        <h1 className="text-3xl font-semibold text-primary dark:text-white xl:text-5xl lg:text-3xl">
           <span className="block w-full">Get a financial experience</span> for
           growing your business!
         </h1>
-        <p className="py-4 text-lg text-gray-500 2xl:py-8 md:py-6 2xl:pr-5">
+        <p className="py-4 text-lg text-gray-500 dark:text-gray-200 2xl:py-8 md:py-6 2xl:pr-5">
           Empowering you to make better financial decisions, We truly are
           professional money planners...
         </p>

@@ -48,7 +48,7 @@ export default function Form() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-xl mx-auto mt-16 flex w-full flex-col border rounded-lg bg-white p-8"
+      className="max-w-xl mx-auto mt-16 flex w-full flex-col border rounded-lg bg-white p-8 mb-10"
     >
       <h1 className="title-font mb-1 text-xl font-medium text-gray-900">
         Blog Form

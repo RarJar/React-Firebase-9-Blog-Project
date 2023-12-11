@@ -11,23 +11,16 @@ export default function View() {
     <div className="max-w-screen-lg mx-auto p-5 sm:p-10 md:p-16">
       {!!blog && (
         <div className="mb-10 rounded overflow-hidden flex flex-col mx-auto">
-          <a
-            href="#"
-            className="text-xl sm:text-4xl font-semibold inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2"
-          >
+          <a className="text-xl sm:text-4xl font-semibold inline-block dark:text-white mb-2">
             {blog.title}
           </a>
 
-          <div className="relative">
-            <a href="#">
-              <img
-                className="w-full"
-                src="https://images.pexels.com/photos/5120892/pexels-photo-5120892.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=625.0&amp;sharp=10&amp;w=1500"
-                alt="Sunset in the mountains"
-              />
-            </a>
-          </div>
-          <div className="py-3 text-md font-regular text-gray-900 flex">
+          <img
+            className="w-full"
+            src="https://images.pexels.com/photos/5120892/pexels-photo-5120892.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=625.0&amp;sharp=10&amp;w=1500"
+            alt="Sunset in the mountains"
+          />
+          <div className="py-3 text-md font-regular text-gray-900  dark:text-white flex">
             <span className="mr-3 flex flex-row items-center">
               <span className="ml-1">6 mins ago</span>
             </span>
@@ -54,7 +47,7 @@ export default function View() {
               <span className="ml-1">AliSher Azimi</span>
             </a>
           </div>
-          <p className="text-gray-700 py-3 text-base leading-8">
+          <p className="text-gray-700  dark:text-white py-3 text-base leading-8">
             {blog.description}
           </p>
           <hr />
