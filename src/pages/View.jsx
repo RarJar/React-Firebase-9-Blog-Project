@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import { useEffect, useState } from "react";
 import { db } from "../firebase/index";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 
 export default function View() {
   let params = useParams();
@@ -12,7 +12,7 @@ export default function View() {
   useEffect(() => {
     setLoading(true);
     let ref = doc(db, "blogs", params.id);
-    getDoc(ref).then((doc) => {
+    onSnapshot(ref, (doc) => {
       let blog = { id: doc.id, ...doc.data() };
       setBlog(blog);
       setLoading(false);
