@@ -23,7 +23,7 @@ export default function BlogCard({ blog }) {
               <a
                 key={category}
                 href="#"
-                className="bg-indigo-200 hover:bg-indigo-300 py-1 px-2 rounded-lg text-sm"
+                className="bg-violet-300 py-1 px-2 rounded-lg text-sm"
               >
                 {category}
               </a>

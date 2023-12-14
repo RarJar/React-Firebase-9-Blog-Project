@@ -48,28 +48,32 @@ export default function Form() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-xl mx-auto mt-16 flex w-full flex-col border rounded-lg bg-white p-8 mb-10"
+      className="max-w-xl mx-auto mt-16 flex w-full flex-col border rounded-lg bg-white dark:bg-darkCard p-8 mb-10"
     >
-      <h1 className="title-font mb-1 text-xl font-medium text-gray-900">
+      <h1 className="title-font mb-1 text-xl font-medium text-gray-900 dark:text-white">
         Blog Form
       </h1>
       <div className="mb-4">
-        <label className="text-sm leading-7 text-gray-600">Title</label>
+        <label className="text-sm leading-7 text-gray-600 dark:text-gray-200">
+          Title
+        </label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full rounded border border-gray-300 bg-white py-1 px-3 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+          className="w-full rounded border border-gray-300 bg-white dark:bg-darkSecondary py-1 px-3 text-base leading-8 text-gray-700 dark:text-white outline-none"
         />
       </div>
       <div className="mb-4">
-        <label className="text-sm leading-7 text-gray-600">Category</label>
+        <label className="text-sm leading-7  text-gray-600 dark:text-gray-200">
+          Category
+        </label>
         <div className="flex">
           <input
             type="text"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full rounded border border-gray-300 bg-white py-1 px-3 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+            className="w-full rounded border border-gray-300 bg-white dark:bg-darkSecondary py-1 px-3 text-base leading-8 text-gray-700 dark:text-white outline-none"
           />
           <button
             type="button"
@@ -83,7 +87,7 @@ export default function Form() {
           {categories.map((category) => (
             <button
               key={category}
-              className="relative bg-sky-500 hover:bg-sky-700 duration-300 py-1 px-4 rounded"
+              className="relative bg-violet-300 py-1 px-4 rounded"
             >
               {category}
               <span
@@ -97,11 +101,13 @@ export default function Form() {
         </div>
       </div>
       <div className="mb-4">
-        <label className="text-sm leading-7 text-gray-600">Description</label>
+        <label className="text-sm leading-7 text-gray-600 dark:text-gray-200">
+          Description
+        </label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="h-32 w-full resize-none rounded border border-gray-300 bg-white py-1 px-3 text-base leading-6 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+          className="h-32 w-full resize-none rounded dark:text-white border border-gray-300 bg-white py-1 px-3 text-base leading-6 text-gray-700 outline-none dark:bg-darkSecondary"
         ></textarea>
       </div>
 

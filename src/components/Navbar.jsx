@@ -4,15 +4,13 @@ import useTheme from "../hooks/useTheme";
 import { useEffect } from "react";
 
 export default function Navbar() {
-  let { theme } = useTheme();
+  let { theme, changeTheme } = useTheme();
 
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.removeItem("theme", "dark");
     }
   }, [theme]);
 
@@ -52,6 +50,7 @@ export default function Navbar() {
                 name="dark-mode"
                 id="dark-toggle"
                 className="checkbox hidden"
+                onClick={changeTheme}
               ></input>
               <div className="block border-[1px] dark:border-white border-gray-900 w-14 h-8 rounded-full"></div>
               <div className="dot absolute left-1 top-1 dark:bg-white bg-gray-800 w-6 h-6 rounded-full transition"></div>
