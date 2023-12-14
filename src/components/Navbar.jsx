@@ -18,28 +18,12 @@ export default function Navbar() {
     <div>
       <nav className="relative p-4 flex justify-between items-center bg-white dark:bg-darkPrimary border-b-2">
         <Link
-          className="text-2xl font-bold text-primary dark:text-white"
+          className="text-3xl font-bold text-primary dark:text-white"
           to="/"
         >
           Library Store
         </Link>
-
-        <div className="lg:hidden">
-          <button
-            className="navbar-burger flex items-center text-primary dark:text-gray-100 p-1"
-            id="navbar_burger"
-          >
-            <svg
-              className="block h-6 w-6 fill-current"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Hamberger menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-            </svg>
-          </button>
-        </div>
-        <div className="hidden lg:flex">
+        <div className="flex">
           <label
             htmlFor="dark-toggle"
             className="flex items-center cursor-pointer mr-1"
@@ -69,13 +53,26 @@ export default function Navbar() {
               id="util_data"
               data="{{ json_encode($util_data) }}"
             ></span>
-            <a
+            <Link
+              to="/login"
               className=" py-1.5 px-3 m-1 text-center bg-gray-100 border border-gray-300 rounded-md text-black  hover:bg-gray-100 dark:text-gray-300 dark:bg-gray-600 hidden lg:inline-block "
               href="https://tailwindflex.com/login"
             >
-              Sign In
-            </a>
+              Login
+            </Link>
           </div>
+          <button
+            className="navbar-burger flex items-center text-primary dark:text-gray-100 p-1"
+            id="navbar_burger"
+          >
+            <svg
+              className="block h-6 w-6 fill-current"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+            </svg>
+          </button>
         </div>
       </nav>
     </div>
