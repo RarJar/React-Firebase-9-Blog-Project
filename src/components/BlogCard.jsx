@@ -21,7 +21,7 @@ export default function BlogCard({ blog }) {
               <a
                 key={category}
                 href="#"
-                className="bg-violet-300 py-1 px-2 rounded-lg text-sm"
+                className="bg-violet-400 py-1 px-2 rounded-lg text-sm"
               >
                 {category}
               </a>
@@ -46,7 +46,7 @@ export default function BlogCard({ blog }) {
             >
               Jonathan Reinink
             </a>
-            <p className="text-gray-600 dark:text-white">Aug 18</p>
+            <p className="text-gray-600 dark:text-white">{blog.id}</p>
           </div>
         </div>
       </div>

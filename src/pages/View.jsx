@@ -32,32 +32,10 @@ export default function View() {
             src="https://images.pexels.com/photos/5120892/pexels-photo-5120892.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;h=625.0&amp;sharp=10&amp;w=1500"
             alt="Sunset in the mountains"
           />
-          <div className="py-3 text-md font-regular text-gray-900  dark:text-white flex">
+          <div className="py-3 text-md font-regular text-gray-900 dark:text-white flex">
             <span className="mr-3 flex flex-row items-center">
               <span className="ml-1">6 mins ago</span>
             </span>
-            <a
-              href="#"
-              className="flex flex-row items-center hover:text-indigo-600"
-            >
-              <svg
-                className="text-indigo-600"
-                fill="currentColor"
-                height="16px"
-                aria-hidden="true"
-                role="img"
-                focusable="false"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill="currentColor"
-                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-                ></path>
-                <path d="M0 0h24v24H0z" fill="none"></path>
-              </svg>
-              <span className="ml-1">AliSher Azimi</span>
-            </a>
           </div>
           <p className="text-gray-700  dark:text-white py-3 text-base leading-8">
             {blog.description}

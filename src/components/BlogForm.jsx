@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import useDataFetch from "../hooks/useDataFetch";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { db } from "../firebase/index";
 
 export default function Form() {
   let [title, setTitle] = useState("");
@@ -8,10 +9,6 @@ export default function Form() {
   let [category, setCategory] = useState("");
   let [categories, setCategories] = useState([]);
   let navigate = useNavigate();
-  let { createData, data: blog } = useDataFetch(
-    "http://localhost:3001/blogs",
-    "POST"
-  );
 
   let addCategory = () => {
     if (category && categories.includes(category)) {
@@ -35,15 +32,14 @@ export default function Form() {
       title,
       categories,
       description,
+      created_at: serverTimestamp(),
     };
-    createData(blog);
-  };
 
-  useEffect(() => {
-    if (blog) {
-      navigate("/");
-    }
-  }, [blog]);
+    let ref = collection(db, "blogs");
+    addDoc(ref, blog);
+
+    navigate("/");
+  };
 
   return (
     <form
@@ -87,7 +83,7 @@ export default function Form() {
           {categories.map((category) => (
             <button
               key={category}
-              className="relative bg-violet-300 py-1 px-4 rounded"
+              className="relative bg-violet-400 py-1 px-4 rounded"
             >
               {category}
               <span

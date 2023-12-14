@@ -4,7 +4,7 @@ import Loading from "./Loading";
 import Search from "./Search";
 import { db } from "../firebase/index";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export default function BlogList() {
   // let location = useLocation();
@@ -21,9 +21,10 @@ export default function BlogList() {
   useEffect(function () {
     setLoading(true);
     let refs = collection(db, "blogs");
-    getDocs(refs).then((docs) => {
+    let q = query(refs, orderBy("created_at", "desc"));
+    getDocs(q).then((docs) => {
+      let blogs = [];
       docs.forEach((doc) => {
-        let blogs = [];
         let blog = { id: doc.id, ...doc.data() };
         blogs.push(blog);
         setBlogs(blogs);
