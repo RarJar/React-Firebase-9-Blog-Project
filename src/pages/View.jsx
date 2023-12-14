@@ -1,11 +1,23 @@
 import { useParams } from "react-router-dom";
-import useDataFetch from "../hooks/useDataFetch";
 import Loading from "../components/Loading";
+import { useEffect, useState } from "react";
+import { db } from "../firebase/index";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function View() {
   let params = useParams();
-  let url = "http://localhost:3001/blogs/";
-  let { data: blog, loading } = useDataFetch(url + params.id);
+  let [loading, setLoading] = useState(false);
+  let [blog, setBlog] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    let ref = doc(db, "blogs", params.id);
+    getDoc(ref).then((doc) => {
+      let blog = { id: doc.id, ...doc.data() };
+      setBlog(blog);
+      setLoading(false);
+    });
+  }, [params.id]);
 
   return (
     <div className="max-w-screen-lg mx-auto p-5 sm:p-10 md:p-16">

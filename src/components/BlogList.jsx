@@ -15,10 +15,11 @@ export default function BlogList() {
   //   : "http://localhost:3001/blogs";
   // let { data: blogs, loading } = useDataFetch(url);
 
-  let [loading, setLoading] = useState();
+  let [loading, setLoading] = useState(false);
   let [blogs, setBlogs] = useState([]);
 
   useEffect(function () {
+    setLoading(true);
     let refs = collection(db, "blogs");
     getDocs(refs).then((docs) => {
       docs.forEach((doc) => {
@@ -26,6 +27,8 @@ export default function BlogList() {
         let blog = { id: doc.id, ...doc.data() };
         blogs.push(blog);
         setBlogs(blogs);
+
+        setLoading(false);
       });
     });
   }, []);
@@ -43,11 +46,11 @@ export default function BlogList() {
         </div>
       )}
 
-      {blogs && !blogs.length && (
+      {/* {blogs && !blogs.length && (
         <div className="text-red-500 text-center text-xl py-[200px]">
           No Result Found !
         </div>
-      )}
+      )} */}
 
       {!!loading && <Loading />}
     </div>

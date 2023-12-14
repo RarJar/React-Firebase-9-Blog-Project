@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function BlogCard({ blog }) {
   return (
-    <div
+    <Link
+      to={`/blog/${blog.id}`}
       key={blog.id}
       className="!text-start h-[485px] shadow-md bg-white dark:bg-darkCard rounded-md flex flex-col justify-between leading-normal"
     >
@@ -12,12 +13,9 @@ export default function BlogCard({ blog }) {
       />
       <div className="p-4 pt-2">
         <div className="mb-6">
-          <Link
-            to={`/blog/${blog.id}`}
-            className="text-gray-900 dark:text-white font-medium text-xl tracking-widest mb-2 hover:text-indigo-600 dark:hover:text-indigo-600 inline-block"
-          >
+          <h1 className="text-gray-900 dark:text-white font-medium text-xl tracking-widest mb-2 hover:text-indigo-600 dark:hover:text-indigo-600 inline-block">
             {blog.title}
-          </Link>
+          </h1>
           <div className="py-1 flex-wrap space-x-2">
             {blog.categories.map((category) => (
               <a
@@ -52,6 +50,6 @@ export default function BlogCard({ blog }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
