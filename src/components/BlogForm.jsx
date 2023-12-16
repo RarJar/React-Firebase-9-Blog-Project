@@ -28,7 +28,6 @@ export default function Form() {
     e.preventDefault();
 
     let blog = {
-      id: Math.floor(Math.random() * 1000),
       title,
       categories,
       description,

@@ -62,7 +62,7 @@ export default function Navbar() {
             </Link>
           </div>
           <button
-            className="navbar-burger flex items-center text-primary dark:text-gray-100 p-1"
+            className="navbar-burger lg:hidden flex items-center text-primary dark:text-gray-100 p-1"
             id="navbar_burger"
           >
             <svg

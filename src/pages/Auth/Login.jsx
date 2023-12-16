@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   let [email, setEmail] = useState("");
@@ -69,6 +70,16 @@ export default function Login() {
       <button className="rounded border-0 bg-violet-600 py-2 px-6 text-lg text-white hover:bg-violet-700 focus:outline-none">
         Login
       </button>
+
+      <p className="text-md text-center mt-3 font-light text-gray-500 dark:text-gray-400">
+        Create new account{" "}
+        <Link
+          className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+          to="/register"
+        >
+          Register here
+        </Link>
+      </p>
     </form>
   );
 }
