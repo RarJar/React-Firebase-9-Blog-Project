@@ -6,44 +6,46 @@ import Login from "../pages/Auth/Login";
 import View from "../pages/View";
 import BlogForm from "../components/BlogForm";
 import Register from "../pages/Auth/Register";
+import { RouterProvider } from "react-router-dom";
+import { useContext } from "react";
+import { authContext } from "../contexts/authContext";
 
-// import { useContext } from "react";
-// import { authContext } from "../contexts/authContext";
+export default function index() {
+  let { user } = useContext(authContext);
+  let isLogin = Boolean(user);
 
-// let { user } = useContext(authContext);
-let isLogin = true;
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "",
+          element: <Home />,
+        },
+        {
+          path: "/blog/:id",
+          element: <View />,
+        },
+        {
+          path: "/form",
+          element: isLogin ? <BlogForm /> : <Navigate to="/" />,
+        },
+        {
+          path: "/login",
+          element: !isLogin ? <Login /> : <Navigate to="/" />,
+        },
+        {
+          path: "/register",
+          element: !isLogin ? <Register /> : <Navigate to="/" />,
+        },
+        {
+          path: "*",
+          element: <FileNotFound />,
+        },
+      ],
+    },
+  ]);
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "",
-        element: <Home />,
-      },
-      {
-        path: "/blog/:id",
-        element: <View />,
-      },
-      {
-        path: "/form",
-        element: isLogin ? <BlogForm /> : <Navigate to="/" />,
-      },
-      {
-        path: "/login",
-        element: !isLogin ? <Login /> : <Navigate to="/" />,
-      },
-      {
-        path: "/register",
-        element: !isLogin ? <Register /> : <Navigate to="/" />,
-      },
-      {
-        path: "*",
-        element: <FileNotFound />,
-      },
-    ],
-  },
-]);
-
-export default router;
+  return <RouterProvider router={router} />;
+}
