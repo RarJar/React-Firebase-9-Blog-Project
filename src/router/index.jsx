@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Layout from "../pages/Layouts/Layout";
 import FileNotFound from "../pages/Errors/404";
@@ -6,6 +6,12 @@ import Login from "../pages/Auth/Login";
 import View from "../pages/View";
 import BlogForm from "../components/BlogForm";
 import Register from "../pages/Auth/Register";
+
+// import { useContext } from "react";
+// import { authContext } from "../contexts/authContext";
+
+// let { user } = useContext(authContext);
+let isLogin = true;
 
 const router = createBrowserRouter([
   {
@@ -22,15 +28,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/form",
-        element: <BlogForm />,
+        element: isLogin ? <BlogForm /> : <Navigate to="/" />,
       },
       {
         path: "/login",
-        element: <Login />,
+        element: !isLogin ? <Login /> : <Navigate to="/" />,
       },
       {
         path: "/register",
-        element: <Register />,
+        element: !isLogin ? <Register /> : <Navigate to="/" />,
       },
       {
         path: "*",
