@@ -18,13 +18,12 @@ export default function BlogCard({ blog }) {
           </h1>
           <div className="py-1 flex-wrap space-x-2">
             {blog.categories.map((category) => (
-              <a
+              <span
                 key={category}
-                href="#"
                 className="bg-violet-400 py-1 px-2 rounded-lg text-sm"
               >
                 {category}
-              </a>
+              </span>
             ))}
           </div>
           <p className="text-gray-700 dark:text-white text-md line-clamp-3 leading-6">
@@ -32,20 +31,15 @@ export default function BlogCard({ blog }) {
           </p>
         </div>
         <div className="flex items-center">
-          <a href="#">
-            <img
-              className="w-10 h-10 rounded-full mr-4"
-              src="https://tailwindcss.com/img/jonathan.jpg"
-              alt="Avatar of Jonathan Reinink"
-            />
-          </a>
+          <img
+            className="w-10 h-10 rounded-full mr-4"
+            src="https://tailwindcss.com/img/jonathan.jpg"
+            alt="Avatar of Jonathan Reinink"
+          />
           <div className="text-sm">
-            <a
-              href="#"
-              className="text-gray-900 dark:text-white font-semibold leading-none"
-            >
+            <span className="text-gray-900 dark:text-white font-semibold leading-none">
               Jonathan Reinink
-            </a>
+            </span>
             <p className="text-gray-600 dark:text-white">{blog.id}</p>
           </div>
         </div>
