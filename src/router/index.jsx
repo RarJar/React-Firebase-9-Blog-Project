@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { authContext } from "../contexts/authContext";
 
 export default function index() {
-  let { user } = useContext(authContext);
+  let { user, authReady } = useContext(authContext);
   let isLogin = Boolean(user);
 
   const router = createBrowserRouter([
@@ -47,5 +47,5 @@ export default function index() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return authReady && <RouterProvider router={router} />;
 }
