@@ -40,7 +40,7 @@ export default function BlogList() {
       {!!blogs && (
         <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-7">
           {blogs.map((blog) => (
-            <div key="index">
+            <div key={blog.id}>
               <BlogCard blog={blog} />
             </div>
           ))}

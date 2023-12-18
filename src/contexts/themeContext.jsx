@@ -3,13 +3,6 @@ import { createContext, useReducer } from "react";
 let ThemeContext = createContext();
 
 let ThemeReducer = (state, action) => {
-  console.log(state, action);
-  // switch (action.type) {
-  //   case "CHANGE_THEME":
-  //     return { ...state, theme: action.payload };
-  //   default:
-  //     return state;
-  // }
   if (state.theme === "dark") {
     return { ...state, theme: "light" };
   } else {

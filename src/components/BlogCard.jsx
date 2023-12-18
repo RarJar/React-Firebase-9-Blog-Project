@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 export default function BlogCard({ blog }) {
   return (
@@ -40,7 +41,9 @@ export default function BlogCard({ blog }) {
             <span className="text-gray-900 dark:text-white font-semibold leading-none">
               Jonathan Reinink
             </span>
-            <p className="text-gray-600 dark:text-white">{blog.id}</p>
+            <p className="text-gray-600 dark:text-white">
+              {moment(blog?.created_at?.seconds * 1000).fromNow()}
+            </p>
           </div>
         </div>
       </div>
