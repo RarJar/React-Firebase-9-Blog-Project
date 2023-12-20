@@ -1,9 +1,10 @@
 import { db } from "../firebase/index";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   collection,
   onSnapshot,
   orderBy,
+  where,
   query,
   doc,
   addDoc,
@@ -16,12 +17,21 @@ export default function useFirestore() {
   let [data, setData] = useState(null);
   let navigate = useNavigate();
 
-  let getCollection = (collectionName, search) => {
+  let getCollection = (collectionName, search, _query) => {
+    let queryRef = useRef(_query).current;
+
     useEffect(
       function () {
         setLoading(true);
         let refs = collection(db, collectionName);
-        let q = query(refs, orderBy("created_at", "desc"));
+
+        let queries = [];
+        if (queryRef) {
+          queries.push(where(...queryRef));
+        }
+        queries.push(orderBy("created_at", "desc"));
+        let q = query(refs, ...queries);
+
         onSnapshot(q, (docs) => {
           let collectionDatas = [];
           docs.forEach((doc) => {
@@ -40,7 +50,7 @@ export default function useFirestore() {
           setLoading(false);
         });
       },
-      [collectionName, search]
+      [collectionName, search, queryRef]
     );
     return { loading, datas };
   };

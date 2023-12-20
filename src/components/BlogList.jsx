@@ -3,14 +3,22 @@ import BlogCard from "./BlogCard";
 import Loading from "./Loading";
 import Search from "./Search";
 import useFirestore from "../hooks/useFirestore";
+import { useContext } from "react";
+import { authContext } from "../contexts/authContext";
 
 export default function BlogList() {
   let location = useLocation();
   let params = new URLSearchParams(location.search);
   let search = params.get("search");
 
+  let { user } = useContext(authContext);
+
   let { getCollection } = useFirestore();
-  let { loading, datas: blogs } = getCollection("blogs", search);
+  let { loading, datas: blogs } = getCollection("blogs", search, [
+    "uid",
+    "==",
+    user.uid,
+  ]);
 
   return (
     <div className="max-w-screen-xl mx-auto text-center p-5 md:p-10">

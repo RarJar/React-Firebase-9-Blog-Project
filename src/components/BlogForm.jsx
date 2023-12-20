@@ -1,12 +1,15 @@
 import { serverTimestamp } from "firebase/firestore";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useFirestore from "../hooks/useFirestore";
+import { authContext } from "../contexts/authContext";
 
 export default function Form() {
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [category, setCategory] = useState("");
   let [categories, setCategories] = useState([]);
+  let { addDocument, loading } = useFirestore();
+  let { user } = useContext(authContext);
 
   let addCategory = () => {
     if (category && categories.includes(category)) {
@@ -22,14 +25,13 @@ export default function Form() {
     );
   };
 
-  let { addDocument, loading } = useFirestore();
-
   let handleSubmit = (e) => {
     e.preventDefault();
     let formData = {
       title,
       categories,
       description,
+      uid: user.uid,
       created_at: serverTimestamp(),
     };
     addDocument("blogs", formData);
