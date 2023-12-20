@@ -1,14 +1,12 @@
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { db } from "../firebase/index";
+import useFirestore from "../hooks/useFirestore";
 
 export default function Form() {
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [category, setCategory] = useState("");
   let [categories, setCategories] = useState([]);
-  let navigate = useNavigate();
 
   let addCategory = () => {
     if (category && categories.includes(category)) {
@@ -24,20 +22,17 @@ export default function Form() {
     );
   };
 
+  let { addDocument, loading } = useFirestore();
+
   let handleSubmit = (e) => {
     e.preventDefault();
-
-    let blog = {
+    let formData = {
       title,
       categories,
       description,
       created_at: serverTimestamp(),
     };
-
-    let ref = collection(db, "blogs");
-    addDoc(ref, blog);
-
-    navigate("/");
+    addDocument("blogs", formData);
   };
 
   return (
@@ -106,11 +101,16 @@ export default function Form() {
         ></textarea>
       </div>
 
-      <button className="rounded border-0 bg-violet-600 py-2 px-6 text-lg text-white hover:bg-violet-700 focus:outline-none">
-        Submit
-      </button>
+      {!loading && (
+        <button
+          type="submit"
+          className="rounded border-0 bg-violet-600 py-2 px-6 text-lg text-white hover:bg-violet-700 focus:outline-none"
+        >
+          Submit
+        </button>
+      )}
 
-      {/* {!!loading && (
+      {!!loading && (
         <button className="rounded cursor-not-allowed border-0 bg-violet-600 py-2 px-6 text-lg text-white hover:bg-violet-700 focus:outline-none">
           <svg
             aria-hidden="true"
@@ -131,7 +131,7 @@ export default function Form() {
           </svg>
           Loading ...
         </button>
-      )} */}
+      )}
     </form>
   );
 }

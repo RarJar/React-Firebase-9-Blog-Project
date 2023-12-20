@@ -1,38 +1,16 @@
-// import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import BlogCard from "./BlogCard";
 import Loading from "./Loading";
 import Search from "./Search";
-import { db } from "../firebase/index";
-import { useEffect, useState } from "react";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import useFirestore from "../hooks/useFirestore";
 
 export default function BlogList() {
-  // let location = useLocation();
-  // let params = new URLSearchParams(location.search);
-  // let search = params.get("search");
-  // let url = search
-  //   ? `http://localhost:3001/blogs?q=${search}`
-  //   : "http://localhost:3001/blogs";
-  // let { data: blogs, loading } = useDataFetch(url);
+  let location = useLocation();
+  let params = new URLSearchParams(location.search);
+  let search = params.get("search");
 
-  let [loading, setLoading] = useState(false);
-  let [blogs, setBlogs] = useState([]);
-
-  useEffect(function () {
-    setLoading(true);
-    let refs = collection(db, "blogs");
-    let q = query(refs, orderBy("created_at", "desc"));
-    onSnapshot(q, (docs) => {
-      let blogs = [];
-      docs.forEach((doc) => {
-        let blog = { id: doc.id, ...doc.data() };
-        blogs.push(blog);
-        setBlogs(blogs);
-
-        setLoading(false);
-      });
-    });
-  }, []);
+  let { getCollection } = useFirestore();
+  let { loading, datas: blogs } = getCollection("blogs", search);
 
   return (
     <div className="max-w-screen-xl mx-auto text-center p-5 md:p-10">
@@ -47,11 +25,11 @@ export default function BlogList() {
         </div>
       )}
 
-      {/* {blogs && !blogs.length && (
+      {blogs && !loading && !blogs.length && (
         <div className="text-red-500 text-center text-xl py-[200px]">
           No Result Found !
         </div>
-      )} */}
+      )}
 
       {!!loading && <Loading />}
     </div>

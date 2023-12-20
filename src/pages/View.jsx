@@ -1,29 +1,19 @@
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
-import { useEffect, useState } from "react";
-import { db } from "../firebase/index";
-import { doc, onSnapshot } from "firebase/firestore";
+import useFirestore from "../hooks/useFirestore";
+import moment from "moment";
 
 export default function View() {
   let params = useParams();
-  let [loading, setLoading] = useState(false);
-  let [blog, setBlog] = useState(null);
 
-  useEffect(() => {
-    setLoading(true);
-    let ref = doc(db, "blogs", params.id);
-    onSnapshot(ref, (doc) => {
-      let blog = { id: doc.id, ...doc.data() };
-      setBlog(blog);
-      setLoading(false);
-    });
-  }, [params.id]);
+  let { getDocument } = useFirestore();
+  let { loading, data: blog } = getDocument("blogs", params);
 
   return (
     <div className="max-w-screen-lg mx-auto p-5 sm:p-10 md:p-16">
       {!!blog && (
-        <div className="mb-10 rounded overflow-hidden flex flex-col mx-auto">
-          <a className="text-xl sm:text-4xl font-semibold inline-block dark:text-white mb-2">
+        <div className="rounded overflow-hidden flex flex-col mx-auto">
+          <a className="text-xl sm:text-4xl mb-5 font-semibold inline-block dark:text-white">
             {blog.title}
           </a>
 
@@ -34,7 +24,9 @@ export default function View() {
           />
           <div className="py-3 text-md font-regular text-gray-900 dark:text-white flex">
             <span className="mr-3 flex flex-row items-center">
-              <span className="ml-1">6 mins ago</span>
+              <span className="ml-1">
+                {moment(blog?.created_at?.seconds * 1000).fromNow()}
+              </span>
             </span>
           </div>
           <p className="text-gray-700  dark:text-white py-3 text-base leading-8">
