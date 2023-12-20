@@ -33,7 +33,7 @@ export default function Navbar() {
       <Link className="text-3xl font-bold text-primary dark:text-white" to="/">
         Library Store
       </Link>
-      <div className="flex">
+      <div className="flex space-x-1 items-center">
         <label
           htmlFor="dark-toggle"
           className="flex items-center cursor-pointer mr-1"
@@ -52,13 +52,25 @@ export default function Navbar() {
         </label>
 
         {!!user && (
+          <Link to="/profile">
+            <img
+              className="w-10 h-10 rounded-full border border-black cursor-pointer"
+              src={
+                user?.photoURL
+                  ? user?.photoURL
+                  : `https://cdn.vectorstock.com/i/preview-1x/17/61/male-avatar-profile-picture-vector-10211761.jpg`
+              }
+            ></img>
+          </Link>
+        )}
+
+        {!!user && (
           <Link to="/form">
-            <button className=" py-1.5 px-3 m-1 text-center bg-violet-700 border rounded-md text-white  hover:bg-violet-500 hover:text-gray-100 dark:text-gray-200 dark:bg-violet-700 hidden lg:block">
+            <button className="py-1.5 px-3 m-1 text-center bg-violet-700 rounded-md text-white  hover:bg-violet-500 dark:bg-violet-700 hidden lg:block cursor-pointer">
               Create Blog
             </button>
           </Link>
         )}
-
         <div>
           {!user && (
             <Link

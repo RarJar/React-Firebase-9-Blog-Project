@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import useRegister from "../../hooks/useRegister";
 
 export default function Register() {
-  let [name, setName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let navigate = useNavigate();
@@ -14,7 +13,7 @@ export default function Register() {
     e.preventDefault();
     let user = await Register(email, password);
     if (user) {
-      navigate("/");
+      navigate("/profile");
     }
   };
 
@@ -23,20 +22,9 @@ export default function Register() {
       onSubmit={handleSubmit}
       className="max-w-xl mx-auto mt-16 flex w-full flex-col border rounded-lg bg-white dark:bg-darkCard p-8 mb-10"
     >
-      <h1 className="title-font mb-1 text-xl font-medium text-gray-900 dark:text-white">
+      <h1 className="title-font mb-2 text-2xl font-medium text-gray-900 dark:text-white">
         Create New account
       </h1>
-      <div className="mb-4">
-        <label className="text-sm leading-7 text-gray-600 dark:text-gray-200">
-          Name
-        </label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full rounded border border-gray-300 bg-white dark:bg-darkSecondary py-1 px-3 text-base leading-8 text-gray-700 dark:text-white outline-none"
-        />
-      </div>
       <div className="mb-4">
         <label className="text-sm leading-7 text-gray-600 dark:text-gray-200">
           Email

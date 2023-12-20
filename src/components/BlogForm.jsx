@@ -42,7 +42,7 @@ export default function Form() {
       onSubmit={handleSubmit}
       className="max-w-xl mx-auto mt-16 flex w-full flex-col border rounded-lg bg-white dark:bg-darkCard p-8 mb-10"
     >
-      <h1 className="title-font mb-1 text-xl font-medium text-gray-900 dark:text-white">
+      <h1 className="title-font mb-2 text-2xl font-medium text-gray-900 dark:text-white">
         Blog Form
       </h1>
       <div className="mb-4">

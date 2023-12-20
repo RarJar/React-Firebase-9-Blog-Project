@@ -1,19 +1,40 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import useLogin from "../../hooks/useLogin";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { authContext } from "../contexts/authContext";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../firebase/index";
 
-export default function Login() {
+export default function Register() {
+  let [name, setName] = useState("");
+  let [photoURL, setPhotoURL] = useState(null);
   let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
+  let [loading, setLoading] = useState(false);
+  let [error, setError] = useState(null);
   let navigate = useNavigate();
-  let { error, loading, Login } = useLogin();
+  let { user } = useContext(authContext);
+
+  useEffect(() => {
+    setName(user?.displayName);
+    setPhotoURL(user?.photoURL);
+    setEmail(user?.email);
+  }, []);
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    let { user } = Login(email, password);
-    if (user) {
-      navigate("/");
-    }
+    setLoading(true);
+    updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL:
+        "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs2/324943647/original/b1df023123041dd17991b436fb09a4782fec67ee/do-stylish-and-professional-profile-pictures.png",
+    })
+      .then(() => {
+        setLoading(false);
+        navigate("/");
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
   };
 
   return (
@@ -22,8 +43,36 @@ export default function Login() {
       className="max-w-xl mx-auto mt-16 flex w-full flex-col border rounded-lg bg-white dark:bg-darkCard p-8 mb-10"
     >
       <h1 className="title-font mb-2 text-2xl font-medium text-gray-900 dark:text-white">
-        Login your account
+        Update your profile
       </h1>
+      <div className="mb-4">
+        <label className="text-sm leading-7 text-gray-600 dark:text-gray-200">
+          Profile Image
+        </label>
+        <img
+          className="w-24 h-24 my-2 rounded-full border border-black cursor-pointer"
+          src={
+            photoURL
+              ? photoURL
+              : `https://cdn.vectorstock.com/i/preview-1x/17/61/male-avatar-profile-picture-vector-10211761.jpg`
+          }
+        ></img>
+        <input
+          type="file"
+          className="w-full rounded border border-gray-300 bg-white dark:bg-darkSecondary py-1 px-3 text-base leading-8 text-gray-700 dark:text-white outline-none"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="text-sm leading-7 text-gray-600 dark:text-gray-200">
+          Name
+        </label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full rounded border border-gray-300 bg-white dark:bg-darkSecondary py-1 px-3 text-base leading-8 text-gray-700 dark:text-white outline-none"
+        />
+      </div>
       <div className="mb-4">
         <label className="text-sm leading-7 text-gray-600 dark:text-gray-200">
           Email
@@ -31,20 +80,9 @@ export default function Login() {
         <input
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          disabled
           className="w-full rounded border border-gray-300 bg-white dark:bg-darkSecondary py-1 px-3 text-base leading-8 text-gray-700 dark:text-white outline-none"
         />
-      </div>
-      <div className="mb-4">
-        <label className="text-sm leading-7 text-gray-600 dark:text-gray-200">
-          Password
-        </label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full mb-4 rounded border border-gray-300 bg-white dark:bg-darkSecondary py-1 px-3 text-base leading-8 text-gray-700 dark:text-white outline-none"
-        ></input>
         {error && <p className="text-red-500">{error}</p>}
       </div>
 
@@ -53,7 +91,7 @@ export default function Login() {
           type="submit"
           className="rounded border-0 bg-violet-600 py-2 px-6 text-lg text-white hover:bg-violet-700 focus:outline-none"
         >
-          Login
+          Update Profile
         </button>
       )}
 
@@ -79,16 +117,6 @@ export default function Login() {
           Loading ...
         </button>
       )}
-
-      <p className="text-md text-center mt-3 font-light text-gray-500 dark:text-gray-400">
-        Create new account{" "}
-        <Link
-          className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-          to="/register"
-        >
-          Register here
-        </Link>
-      </p>
     </form>
   );
 }

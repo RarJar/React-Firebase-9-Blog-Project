@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import Layout from "../pages/Layouts/Layout";
 import FileNotFound from "../pages/Errors/404";
 import Login from "../pages/Auth/Login";
+import Profile from "../pages/Profile";
 import View from "../pages/View";
 import BlogForm from "../components/BlogForm";
 import Register from "../pages/Auth/Register";
@@ -38,6 +39,10 @@ export default function index() {
         {
           path: "/register",
           element: !isLogin ? <Register /> : <Navigate to="/" />,
+        },
+        {
+          path: "/profile",
+          element: isLogin ? <Profile /> : <Navigate to="/" />,
         },
         {
           path: "*",
