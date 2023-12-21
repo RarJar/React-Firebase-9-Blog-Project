@@ -2,9 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../contexts/authContext";
 import { updateProfile } from "firebase/auth";
-import { auth } from "../firebase/index";
+import { auth, storage } from "../firebase/index";
+import {
+  // deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 
 export default function Register() {
+  let [file, setFile] = useState(null);
   let [name, setName] = useState("");
   let [photoURL, setPhotoURL] = useState(null);
   let [email, setEmail] = useState("");
@@ -19,13 +26,44 @@ export default function Register() {
     setEmail(user?.email);
   }, []);
 
+  let handleProfileImageChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  let previewImage = async (file) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      let profileImage = document.getElementById("profileImage");
+      profileImage.src = reader.result;
+    };
+
+    // Delete the file
+    // if (user?.photoURL) {
+    //   const desertRef = ref(storage, "profiles/" + user?.photoURL);
+    //   await deleteObject(desertRef);
+    // }
+
+    // Upload new file
+    // let path = "profiles/" + Date.now().toString() + "_" + file.name;
+    let path = "profiles/" + user?.uid;
+    let storageRef = ref(storage, path);
+    await uploadBytes(storageRef, file);
+    let url = await getDownloadURL(storageRef);
+    setPhotoURL(url);
+  };
+  useEffect(() => {
+    if (file) {
+      previewImage(file);
+    }
+  }, [file]);
+
   let handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL:
-        "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs2/324943647/original/b1df023123041dd17991b436fb09a4782fec67ee/do-stylish-and-professional-profile-pictures.png",
+      photoURL: photoURL,
     })
       .then(() => {
         setLoading(false);
@@ -51,6 +89,7 @@ export default function Register() {
         </label>
         <img
           className="w-24 h-24 my-2 rounded-full border border-black cursor-pointer"
+          id="profileImage"
           src={
             photoURL
               ? photoURL
@@ -59,6 +98,7 @@ export default function Register() {
         ></img>
         <input
           type="file"
+          onChange={handleProfileImageChange}
           className="w-full rounded border border-gray-300 bg-white dark:bg-darkSecondary py-1 px-3 text-base leading-8 text-gray-700 dark:text-white outline-none"
         />
       </div>

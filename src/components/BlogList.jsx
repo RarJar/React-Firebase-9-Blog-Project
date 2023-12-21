@@ -14,11 +14,11 @@ export default function BlogList() {
   let { user } = useContext(authContext);
 
   let { getCollection } = useFirestore();
-  let { loading, datas: blogs } = getCollection("blogs", search, [
-    "uid",
-    "==",
-    user.uid,
-  ]);
+  let { loading, datas: blogs } = getCollection(
+    "blogs",
+    search,
+    user ? ["uid", "==", user?.uid] : null
+  );
 
   return (
     <div className="max-w-screen-xl mx-auto text-center p-5 md:p-10">
