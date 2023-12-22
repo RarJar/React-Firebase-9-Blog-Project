@@ -1,11 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../assets/css/index.css";
 import useTheme from "../hooks/useTheme";
 import { useContext, useEffect } from "react";
 import { authContext } from "../contexts/authContext";
-import useLogout from "../hooks/useLogout";
 
-export default function Navbar() {
+export default function Navbar({ createOpenModal }) {
   let { theme, changeTheme } = useTheme();
   let { user } = useContext(authContext);
 
@@ -16,17 +15,6 @@ export default function Navbar() {
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
-
-  let { loading, error, Logout } = useLogout();
-  let navigate = useNavigate();
-
-  let logout = async (e) => {
-    e.preventDefault();
-    let user = await Logout();
-    if (user) {
-      navigate("/");
-    }
-  };
 
   return (
     <nav className="sticky top-0 p-4 z-10 flex justify-between items-center bg-white dark:bg-darkPrimary border-b-2">
@@ -82,7 +70,7 @@ export default function Navbar() {
           )}
           {!!user && (
             <button
-              onClick={logout}
+              onClick={() => createOpenModal()}
               className="py-1.5 px-3 m-1 text-center text-white rounded-md bg-red-600 hidden lg:inline-block "
             >
               Logout
